@@ -76,10 +76,12 @@ class Canvas {
     strokeWeight(theme.options.thickLineSize * scale);
     thickLines.forEach(singleLine => this.drawLine(singleLine.x1, singleLine.y1, singleLine.x2, singleLine.y2));
     for (let i = 1; i < layoutMatrix[0].length; i++) {
-      if (i % sectionsSpacing === 0) {
+      if (i % sectionsSpacing === 0)
         this.drawLine(rowSeries[0].length * cellSize + i * cellSize, 0, rowSeries[0].length * cellSize + i * cellSize, columnSeries.length * cellSize + layoutMatrix.length * cellSize);
-        this.drawLine(0, columnSeries.length * cellSize + i * cellSize, rowSeries[0].length * cellSize + layoutMatrix[0].length * cellSize, columnSeries.length * cellSize + i * cellSize);
-      }
+    }
+    for (let i = 1; i < layoutMatrix.length; i++) {
+      if (i % sectionsSpacing === 0)
+      this.drawLine(0, columnSeries.length * cellSize + i * cellSize, rowSeries[0].length * cellSize + layoutMatrix[0].length * cellSize, columnSeries.length * cellSize + i * cellSize);
     }
     // Thin lines
     stroke(theme.options.thinLineColor);
@@ -127,8 +129,8 @@ class Canvas {
     const playerMatrixProp = playerMatrix.length >= playerMatrix[0].length ? playerMatrix.length : playerMatrix[0].length;
     const miniCellSize = columnSeries.length < rowSeries[0].length ? columnSeries.length * cellSize / playerMatrixProp : rowSeries[0].length * cellSize / playerMatrixProp;
     const offset = {
-      x: columnSeries.length < rowSeries[0].length ? (rowSeries[0].length * cellSize - columnSeries.length * cellSize) / 2 : 0,
-      y: columnSeries.length < rowSeries[0].length ? 0 : (columnSeries.length * cellSize - rowSeries[0].length * cellSize) / 2
+      x: columnSeries.length < rowSeries[0].length ? (rowSeries[0].length - columnSeries.length) * cellSize / 2 : playerMatrix[0].length !== playerMatrix.length ? cellSize * rowSeries[0].length / columnSeries.length : 0,
+      y: columnSeries.length < rowSeries[0].length ? (playerMatrix[0].length !== playerMatrix.length ? cellSize * rowSeries[0].length / columnSeries.length : 0) : (columnSeries.length - rowSeries[0].length) * cellSize / 2
     };
 
     fill(theme.options.markColor);
