@@ -5,7 +5,8 @@ class Level {
       layoutMatrix,
       playerMatrix: Matrix.generate(layoutMatrix.length, layoutMatrix[0].length),
       rowSeries: Matrix.flatten(Matrix.rowSeries(layoutMatrix), 'RIGHT'),
-      columnSeries: Matrix.flatten(Matrix.columnSeries(layoutMatrix), 'BOTTOM')
+      columnSeries: Matrix.flatten(Matrix.columnSeries(layoutMatrix), 'BOTTOM'),
+      completed: false
     };
   }
   get isCompleted() {

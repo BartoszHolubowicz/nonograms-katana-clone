@@ -27,6 +27,11 @@ class Canvas {
       this.options.currentLevel.options.playerMatrix[i][j] = type;
     else
       this.options.currentLevel.options.playerMatrix[i][j] = 0;
+
+    if (this.options.currentLevel.isCompleted && !this.options.currentLevel.completed) {
+      this.options.currentLevel.completed = true;
+      alert('congrats u won\n:)');
+    }
   }
   drawText(string, x, y) {
     const {scale, theme} = this.options;
