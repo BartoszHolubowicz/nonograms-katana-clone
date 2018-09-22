@@ -43,18 +43,18 @@ function mouseWheel(evt) {
   }
   updateScalingVector(p5.Vector.add(tempOffsetVector, offsetVector));
 }
-function mousePressed() {
+function touchStarted() {
   drag = { ...drag, x1: mouseX, y1: mouseY, x2: mouseX, y2: mouseY };
   return false;
 }
-function mouseDragged() {
+function touchMoved() {
   tempOffsetVector.set(mouseX - drag.x1, mouseY - drag.y1);
   updateScalingVector(p5.Vector.add(tempOffsetVector, offsetVector));
   return false;
 }
-function mouseReleased(evt) {
+function touchEnded(evt) {
   if (tempOffsetVector.mag() <= 3 && gameCanvas.mouseInsideBoard)
-    gameCanvas.placeMark(mouseX, mouseY, evt.button + 1);
+    gameCanvas.placeMark(mouseX, mouseY, evt.button ? evt.button + 1 : 1);
   offsetVector.add(tempOffsetVector);
   tempOffsetVector.set(0, 0);
   updateScalingVector(offsetVector);
